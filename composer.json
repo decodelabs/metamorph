@@ -12,19 +12,31 @@
         "php": "^7.2|^8.0",
         "symfony/polyfill-php80": "^1.22",
 
+        "decodelabs/archetype": "^0.1",
+        "decodelabs/coercion": "^0.1",
         "decodelabs/glitch-support": "^0.3",
-        "decodelabs/exceptional": "^0.3"
+        "decodelabs/exceptional": "^0.3",
+        "decodelabs/tagged": "^0.12"
     },
     "require-dev": {
         "phpunit/phpunit": "^8",
         "phpstan/phpstan": "^1",
         "phpstan/extension-installer": "^1.0",
         "decodelabs/phpstan-decodelabs": "^0.5",
-        "symplify/easy-coding-standard": "^10"
+        "symplify/easy-coding-standard": "^10",
+
+        "soundasleep/html2text": "^1.1",
+        "erusev/parsedown": "^1.7",
+        "michelf/php-markdown": "^1.9"
+    },
+    "suggest": {
+        "erusev/parsedown": "Add support for Markdown parsing",
+        "michelf/php-markdown": "Alternative Markdown parsing provider",
+        "soundasleep/html2text": "Better HTML to text conversion"
     },
     "autoload": {
         "psr-4": {
-            "DecodeLabs\\Metamorph\\": "src/"
+            "DecodeLabs\\": "src/"
         }
     },
     "extra": {
