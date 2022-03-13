@@ -11,7 +11,8 @@ namespace DecodeLabs\Metamorph\Handler;
 
 use DecodeLabs\Coercion;
 use DecodeLabs\Exceptional;
-use DecodeLabs\Metamorph\Handler;
+use DecodeLabs\Metamorph\MacroHandler;
+use DecodeLabs\Metamorph\MacroHandlerTrait;
 use DecodeLabs\Tagged\Buffer;
 
 use Michelf\Markdown as MarkdownLib;
@@ -19,8 +20,23 @@ use Parsedown;
 
 use Stringable;
 
-class Markdown implements Handler
+class Markdown implements MacroHandler
 {
+    use MacroHandlerTrait;
+
+    public const MACROS = [
+        'safe' => [
+            'safe' => true
+        ],
+        'inline' => [
+            'inline' => true
+        ],
+        'inline.safe' => [
+            'safe' => true,
+            'inline' => true
+        ],
+    ];
+
     /**
      * @var bool
      */

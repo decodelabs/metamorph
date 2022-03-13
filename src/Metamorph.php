@@ -10,7 +10,8 @@ declare(strict_types=1);
 namespace DecodeLabs;
 
 use DecodeLabs\Metamorph\Handler;
-
+use DecodeLabs\Metamorph\MacroHandler;
+use ReflectionClass;
 use Stringable;
 
 class Metamorph
@@ -59,8 +60,22 @@ class Metamorph
         string $name,
         ?array $options = []
     ): Handler {
+        $parts = explode('.', $name, 2);
+        $name = $parts[0];
+        $macro = $parts[1] ?? null;
+
         /** @var class-string<Handler> */
         $class = Archetype::resolve(Handler::class, ucfirst($name));
+        $reflection = new ReflectionClass($class);
+
+        if (
+            $reflection->implementsInterface(MacroHandler::class) &&
+            $macro !== null
+        ) {
+            /** @var class-string<MacroHandler> $class */
+            $options = array_merge($class::loadMacro($macro) ?? [], $options ?? []);
+        }
+
         return new $class($options ?? []);
     }
 }
