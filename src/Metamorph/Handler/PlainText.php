@@ -12,6 +12,7 @@ namespace DecodeLabs\Metamorph\Handler;
 use DecodeLabs\Coercion;
 use DecodeLabs\Exceptional;
 use DecodeLabs\Metamorph\Handler;
+use DecodeLabs\Tagged as Html;
 use DecodeLabs\Tagged\Buffer;
 use DecodeLabs\Tagged\ContentCollection;
 use DecodeLabs\Tagged\Element;
@@ -24,6 +25,11 @@ class PlainText implements Handler
      * @var int|null
      */
     protected $maxLength = null;
+
+    /**
+     * @var bool
+     */
+    protected $strip = false;
 
     /**
      * @var string
@@ -48,6 +54,7 @@ class PlainText implements Handler
     public function __construct(array $options)
     {
         $this->maxLength = Coercion::toIntOrNull($options['maxLength'] ?? $this->maxLength);
+        $this->strip = Coercion::toBool($options['strip'] ?? $this->strip);
         $this->format = Coercion::toString($options['format'] ?? $this->format);
         $this->wrap = Coercion::toStringOrNull($options['wrap'] ?? $this->wrap);
         $this->ellipsis = Coercion::toString($options['ellipsis'] ?? $this->ellipsis);
@@ -70,20 +77,10 @@ class PlainText implements Handler
             $setup($this);
         }
 
-        switch ($this->format) {
-            case 'html':
-                $content = $this->convertHtml($content);
-                break;
-
-            case null:
-            case 'text':
-                $content = $content;
-                break;
-
-            default:
-                throw Exceptional::ComponentUnavailable(
-                    'Unable to escape content in ' . $this->format . ' format'
-                );
+        if ($this->strip) {
+            $content = $this->strip($content);
+        } else {
+            $content = $this->escape($content);
         }
 
         if ($content === null) {
@@ -99,12 +96,36 @@ class PlainText implements Handler
         return $this->wrap($content, $shorten);
     }
 
+
+    /**
+     * Strip significant characters from content
+     */
+    protected function strip(string $content): ?string
+    {
+        switch ($this->format) {
+            case 'html':
+                return $this->stripHtml($content);
+
+            case 'markdown':
+                $md = new Markdown(['safe' => false]);
+                $content = (string)$md->convert($content);
+                return $this->stripHtml($content);
+
+            case null:
+            case 'text':
+                return $content;
+
+            default:
+                throw Exceptional::ComponentUnavailable(
+                    'Unable to strip content in ' . $this->format . ' format'
+                );
+        }
+    }
+
     /**
     * Convert HTML to plain text
-    *
-    * @return string|Stringable|null
     */
-    protected function convertHtml(string $content)
+    protected function stripHtml(string $content): ?string
     {
         $content = new Buffer($content);
         $content = (string)ContentCollection::normalize($content);
@@ -122,6 +143,33 @@ class PlainText implements Handler
             return str_replace("\r\n", "\n", $output);
         }
     }
+
+
+
+
+    /**
+     * Escape characters in input
+     */
+    protected function escape(string $content): ?string
+    {
+        switch ($this->format) {
+            case 'html':
+                return $this->escapeHtml($content);
+
+            default:
+                return $content;
+        }
+    }
+
+
+    /**
+     * Escape HTML input
+     */
+    protected function escapeHtml(string $content): ?string
+    {
+        return htmlspecialchars($content, ENT_QUOTES, 'UTF-8');
+    }
+
 
     /**
      * Shorten output string
@@ -177,14 +225,16 @@ class PlainText implements Handler
         if ($shorten) {
             $content = [
                 Element::create('abbr', [
-                    $this->shorten($content),
+                    new Buffer(str_replace("\n", '<br />' . "\n", $this->shorten($content))),
                     Element::create('span.ellipsis', $this->ellipsis)
                 ], [
                     'title' => $content
                 ])
             ];
+
+            return ContentCollection::normalize($content);
         }
 
-        return ContentCollection::normalize($content);
+        return new Buffer(str_replace("\n", '<br />' . "\n", $content));
     }
 }
