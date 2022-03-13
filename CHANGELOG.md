@@ -1,3 +1,6 @@
+## v0.2.0 (2022-03-13)
+* Merged Escape Handler into PlainText Handler
+
 ## v0.1.2 (2022-03-13)
 * Added PlainText handler
 
