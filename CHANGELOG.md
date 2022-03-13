@@ -1,3 +1,6 @@
+## v0.3.3 (2022-03-13)
+* Updated Tagged dependency
+
 ## v0.3.2 (2022-03-13)
 * Fixed Text wrap escaping
 
