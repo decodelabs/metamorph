@@ -79,8 +79,6 @@ class Text implements MacroHandler
             $setup($this);
         }
 
-        $content = $this->escape($content);
-
         if ($content === null) {
             return $content;
         }
@@ -150,7 +148,7 @@ class Text implements MacroHandler
         if ($shorten) {
             $content = [
                 Element::create('abbr', [
-                    new Buffer(str_replace("\n", '<br />' . "\n", $this->shorten($content))),
+                    new Buffer(str_replace("\n", '<br />' . "\n", $this->shorten($this->escape($content)))),
                     Element::create('span.ellipsis', $this->ellipsis)
                 ], [
                     'title' => $content
@@ -160,6 +158,6 @@ class Text implements MacroHandler
             return ContentCollection::normalize($content);
         }
 
-        return new Buffer(str_replace("\n", '<br />' . "\n", $content));
+        return new Buffer(str_replace("\n", '<br />' . "\n", $this->escape($content)));
     }
 }
