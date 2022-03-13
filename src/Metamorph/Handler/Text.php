@@ -79,14 +79,6 @@ class Text implements MacroHandler
             $setup($this);
         }
 
-        $content = $this->escape($content);
-
-        if ($content === null) {
-            return $content;
-        }
-
-        $content = (string)$content;
-
         $shorten =
             $this->maxLength > 0 &&
             mb_strlen($content) > $this->maxLength;
@@ -98,7 +90,7 @@ class Text implements MacroHandler
     /**
      * Strip significant characters from content
      */
-    protected function escape(string $content): ?string
+    protected function escape(string $content): string
     {
         return htmlspecialchars($content, ENT_QUOTES, 'UTF-8');
     }
@@ -150,7 +142,7 @@ class Text implements MacroHandler
         if ($shorten) {
             $content = [
                 Element::create('abbr', [
-                    new Buffer(str_replace("\n", '<br />' . "\n", $this->shorten($content))),
+                    new Buffer(str_replace("\n", '<br />' . "\n", $this->shorten($this->escape($content)))),
                     Element::create('span.ellipsis', $this->ellipsis)
                 ], [
                     'title' => $content
@@ -160,6 +152,6 @@ class Text implements MacroHandler
             return ContentCollection::normalize($content);
         }
 
-        return new Buffer(str_replace("\n", '<br />' . "\n", $content));
+        return new Buffer(str_replace("\n", '<br />' . "\n", $this->escape($content)));
     }
 }

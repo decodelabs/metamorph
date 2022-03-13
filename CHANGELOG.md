@@ -1,3 +1,6 @@
+## v0.3.2 (2022-03-13)
+* Fixed Text wrap escaping
+
 ## v0.3.1 (2022-03-13)
 * Fixed HtmlToText handler
 
