@@ -10,45 +10,28 @@ declare(strict_types=1);
 namespace DecodeLabs\Metamorph\Handler;
 
 use DecodeLabs\Coercion;
-use DecodeLabs\Exceptional;
 use DecodeLabs\Metamorph\MacroHandler;
 use DecodeLabs\Metamorph\MacroHandlerTrait;
-use DecodeLabs\Tagged as Html;
 use DecodeLabs\Tagged\Buffer;
 use DecodeLabs\Tagged\ContentCollection;
 use DecodeLabs\Tagged\Element;
 use Soundasleep\Html2Text;
 use Stringable;
 
-class PlainText implements MacroHandler
+class Html implements MacroHandler
 {
     use MacroHandlerTrait;
 
     public const MACROS = [
-        'raw' => [
-            'format' => 'html',
-            'strip' => false,
-            'wrap' => 'text'
+        'wrap' => [
+            'wrap' => true
         ],
-        'strip' => [
-            'format' => 'html',
-            'strip' => true,
-            'wrap' => 'text'
+        'preview' => [
+            'maxLength' => 50
         ],
-        'html' => [
-            'format' => 'html',
-            'strip' => false,
-            'wrap' => 'html'
-        ],
-        'html.strip' => [
-            'format' => 'html',
-            'strip' => true,
-            'wrap' => 'html'
-        ],
-        'markdown' => [
-            'format' => 'markdown',
-            'strip' => true,
-            'wrap' => 'html'
+        'preview.wrap' => [
+            'maxLength' => 50,
+            'wrap' => true
         ]
     ];
 
@@ -59,24 +42,14 @@ class PlainText implements MacroHandler
     protected $maxLength = null;
 
     /**
-     * @var bool
-     */
-    protected $strip = false;
-
-    /**
-     * @var string
-     */
-    protected $format = 'html';
-
-    /**
-     * @var string|null
-     */
-    protected $wrap = 'html';
-
-    /**
      * @var string
      */
     protected $ellipsis = '…';
+
+    /**
+     * @var bool
+     */
+    protected $wrap = false;
 
     /**
      * Set options
@@ -86,9 +59,7 @@ class PlainText implements MacroHandler
     public function __construct(array $options)
     {
         $this->maxLength = Coercion::toIntOrNull($options['maxLength'] ?? $this->maxLength);
-        $this->strip = Coercion::toBool($options['strip'] ?? $this->strip);
-        $this->format = Coercion::toString($options['format'] ?? $this->format);
-        $this->wrap = Coercion::toStringOrNull($options['wrap'] ?? $this->wrap);
+        $this->wrap = Coercion::toBool($options['wrap'] ?? $this->wrap);
         $this->ellipsis = Coercion::toString($options['ellipsis'] ?? $this->ellipsis);
     }
 
@@ -109,11 +80,7 @@ class PlainText implements MacroHandler
             $setup($this);
         }
 
-        if ($this->strip) {
-            $content = $this->strip($content);
-        } else {
-            $content = $this->escape($content);
-        }
+        $content = $this->strip($content);
 
         if ($content === null) {
             return $content;
@@ -134,31 +101,6 @@ class PlainText implements MacroHandler
      */
     protected function strip(string $content): ?string
     {
-        switch ($this->format) {
-            case 'html':
-                return $this->stripHtml($content);
-
-            case 'markdown':
-                $md = new Markdown(['safe' => false]);
-                $content = (string)$md->convert($content);
-                return $this->stripHtml($content);
-
-            case null:
-            case 'text':
-                return $content;
-
-            default:
-                throw Exceptional::ComponentUnavailable(
-                    'Unable to strip content in ' . $this->format . ' format'
-                );
-        }
-    }
-
-    /**
-    * Convert HTML to plain text
-    */
-    protected function stripHtml(string $content): ?string
-    {
         $content = new Buffer($content);
         $content = (string)ContentCollection::normalize($content);
 
@@ -174,32 +116,6 @@ class PlainText implements MacroHandler
             $output = html_entity_decode(strip_tags($content), ENT_QUOTES | ENT_HTML5);
             return str_replace("\r\n", "\n", $output);
         }
-    }
-
-
-
-
-    /**
-     * Escape characters in input
-     */
-    protected function escape(string $content): ?string
-    {
-        switch ($this->format) {
-            case 'html':
-                return $this->escapeHtml($content);
-
-            default:
-                return $content;
-        }
-    }
-
-
-    /**
-     * Escape HTML input
-     */
-    protected function escapeHtml(string $content): ?string
-    {
-        return htmlspecialchars($content, ENT_QUOTES, 'UTF-8');
     }
 
 
@@ -219,18 +135,10 @@ class PlainText implements MacroHandler
      */
     protected function wrap(string $content, bool $shorten)
     {
-        switch ($this->wrap) {
-            case 'html':
-                return $this->wrapHtml($content, $shorten);
-
-            case null:
-            case 'text':
-                return $this->wrapText($content, $shorten);
-
-            default:
-                throw Exceptional::ComponentUnavailable(
-                    'Unable to wrap content in ' . $this->format . ' format'
-                );
+        if ($this->wrap) {
+            return $this->wrapHtml($content, $shorten);
+        } else {
+            return $this->wrapText($content, $shorten);
         }
     }
 
