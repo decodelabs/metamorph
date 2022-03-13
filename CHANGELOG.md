@@ -1,3 +1,6 @@
+## v0.1.2 (2022-03-13)
+* Added PlainText handler
+
 ## v0.1.1 (2022-03-13)
 * Allow null as input
 * Added Escape handler
