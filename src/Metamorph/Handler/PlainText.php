@@ -66,7 +66,7 @@ class PlainText implements MacroHandler
     /**
      * @var string
      */
-    protected $format = 'text';
+    protected $format = 'html';
 
     /**
      * @var string|null
