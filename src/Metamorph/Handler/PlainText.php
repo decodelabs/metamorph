@@ -11,7 +11,8 @@ namespace DecodeLabs\Metamorph\Handler;
 
 use DecodeLabs\Coercion;
 use DecodeLabs\Exceptional;
-use DecodeLabs\Metamorph\Handler;
+use DecodeLabs\Metamorph\MacroHandler;
+use DecodeLabs\Metamorph\MacroHandlerTrait;
 use DecodeLabs\Tagged as Html;
 use DecodeLabs\Tagged\Buffer;
 use DecodeLabs\Tagged\ContentCollection;
@@ -19,8 +20,39 @@ use DecodeLabs\Tagged\Element;
 use Soundasleep\Html2Text;
 use Stringable;
 
-class PlainText implements Handler
+class PlainText implements MacroHandler
 {
+    use MacroHandlerTrait;
+
+    public const MACROS = [
+        'raw' => [
+            'format' => 'html',
+            'strip' => false,
+            'wrap' => 'text'
+        ],
+        'strip' => [
+            'format' => 'html',
+            'strip' => true,
+            'wrap' => 'text'
+        ],
+        'html' => [
+            'format' => 'html',
+            'strip' => false,
+            'wrap' => 'html'
+        ],
+        'html.strip' => [
+            'format' => 'html',
+            'strip' => true,
+            'wrap' => 'html'
+        ],
+        'markdown' => [
+            'format' => 'markdown',
+            'strip' => true,
+            'wrap' => 'html'
+        ]
+    ];
+
+
     /**
      * @var int|null
      */
@@ -34,12 +66,12 @@ class PlainText implements Handler
     /**
      * @var string
      */
-    protected $format = 'html';
+    protected $format = 'text';
 
     /**
      * @var string|null
      */
-    protected $wrap = null;
+    protected $wrap = 'html';
 
     /**
      * @var string
