@@ -79,12 +79,6 @@ class Text implements MacroHandler
             $setup($this);
         }
 
-        if ($content === null) {
-            return $content;
-        }
-
-        $content = (string)$content;
-
         $shorten =
             $this->maxLength > 0 &&
             mb_strlen($content) > $this->maxLength;
@@ -96,7 +90,7 @@ class Text implements MacroHandler
     /**
      * Strip significant characters from content
      */
-    protected function escape(string $content): ?string
+    protected function escape(string $content): string
     {
         return htmlspecialchars($content, ENT_QUOTES, 'UTF-8');
     }
