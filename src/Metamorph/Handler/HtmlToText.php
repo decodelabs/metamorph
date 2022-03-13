@@ -18,7 +18,7 @@ use DecodeLabs\Tagged\Element;
 use Soundasleep\Html2Text;
 use Stringable;
 
-class Html implements MacroHandler
+class HtmlToText implements MacroHandler
 {
     use MacroHandlerTrait;
 

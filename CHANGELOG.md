@@ -1,3 +1,6 @@
+## v0.3.1 (2022-03-13)
+* Fixed HtmlToText handler
+
 ## v0.3.0 (2022-03-13)
 * Split PlainText Handler into HtmlToText and Text Handlers
 
