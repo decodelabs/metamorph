@@ -18,8 +18,8 @@ class Metamorph
     /**
      * Initiate conversion
      *
-     * @param array{0: string, 1?: array<string, mixed>, 2?: callable(Handler):void|null} $args
-     * @return string|Stringable
+     * @param array{0: string|null, 1?: array<string, mixed>, 2?: callable(Handler):void|null} $args
+     * @return string|Stringable|null
      */
     public static function __callStatic(string $method, array $args)
     {
@@ -31,14 +31,21 @@ class Metamorph
      *
      * @param callable(object):void|null $setup
      * @param array<string, mixed>|null $options
-     * @return string|Stringable
+     * @return string|Stringable|null
      */
     public static function convert(
         string $name,
-        string $content,
+        ?string $content,
         ?array $options = [],
         ?callable $setup = null
     ) {
+        if (
+            $content === null ||
+            !strlen($content)
+        ) {
+            return null;
+        }
+
         $handler = static::loadHandler($name, $options);
         return $handler->convert($content, $setup);
     }
