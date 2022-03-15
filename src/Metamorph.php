@@ -14,6 +14,7 @@ use DecodeLabs\Metamorph\MacroHandler;
 use DecodeLabs\Tagged\ContentCollection;
 use ReflectionClass;
 use Stringable;
+use Throwable;
 
 class Metamorph
 {
