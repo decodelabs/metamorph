@@ -37,8 +37,13 @@ class Metamorph
      */
     public static function resolveUrl(string $url): string
     {
-        if ($resolver = static::$urlResolver) {
+        if (!$resolver = static::$urlResolver) {
+            return $url;
+        }
+
+        try {
             $url = $resolver($url);
+        } catch (Throwable $e) {
         }
 
         return $url;
