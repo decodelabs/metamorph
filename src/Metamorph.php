@@ -11,6 +11,7 @@ namespace DecodeLabs;
 
 use DecodeLabs\Metamorph\Handler;
 use DecodeLabs\Metamorph\MacroHandler;
+use DecodeLabs\Tagged\ContentCollection;
 use ReflectionClass;
 use Stringable;
 
@@ -19,7 +20,7 @@ class Metamorph
     /**
      * Initiate conversion
      *
-     * @param array{0: string|null, 1?: array<string, mixed>, 2?: callable(Handler):void|null} $args
+     * @param array{0: mixed, 1?: array<string, mixed>, 2?: callable(Handler):void|null} $args
      * @return string|Stringable|null
      */
     public static function __callStatic(string $method, array $args)
@@ -30,25 +31,46 @@ class Metamorph
     /**
      * Handle conversion
      *
+     * @param mixed $content
      * @param callable(object):void|null $setup
      * @param array<string, mixed>|null $options
      * @return string|Stringable|null
      */
     public static function convert(
         string $name,
-        ?string $content,
+        $content,
         ?array $options = [],
         ?callable $setup = null
     ) {
+        if ($content === null) {
+            return null;
+        }
+
         if (
-            $content === null ||
-            !strlen($content)
+            null === ($content = static::prepareContent($content))
         ) {
             return null;
         }
 
         $handler = static::loadHandler($name, $options);
         return $handler->convert($content, $setup);
+    }
+
+    /**
+     * Prepare content for convert
+     *
+     * @param mixed $content
+     */
+    protected static function prepareContent($content): ?string
+    {
+        if (
+            is_string($content) ||
+            $content instanceof Stringable
+        ) {
+            return (string)$content;
+        }
+
+        return (string)ContentCollection::normalize($content);
     }
 
     /**
