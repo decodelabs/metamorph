@@ -1,4 +1,4 @@
-# Pandora
+# Metamorph
 
 [![PHP from Packagist](https://img.shields.io/packagist/php-v/decodelabs/metamorph?style=flat)](https://packagist.org/packages/decodelabs/metamorph)
 [![Latest Version](https://img.shields.io/packagist/v/decodelabs/metamorph.svg?style=flat)](https://packagist.org/packages/decodelabs/metamorph)
