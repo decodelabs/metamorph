@@ -23,6 +23,7 @@ use Stringable;
 class Markdown implements MacroHandler
 {
     use MacroHandlerTrait;
+    use HtmlTrait;
 
     public const MACROS = [
         'safe' => [
@@ -56,6 +57,7 @@ class Markdown implements MacroHandler
     {
         $this->inline = Coercion::toBool($options['inline'] ?? $this->inline);
         $this->safe = Coercion::toBool($options['safe'] ?? $this->safe);
+        $this->resolveUrls = Coercion::toBool($options['resolveUrls'] ?? $this->resolveUrls);
     }
 
 
@@ -105,6 +107,7 @@ class Markdown implements MacroHandler
             $output = $parser->text($content);
         }
 
+        $output = $this->resolveHtmlUrls($output);
         return new Buffer($output);
     }
 
@@ -128,6 +131,8 @@ class Markdown implements MacroHandler
             $setup($parser);
         }
 
-        return new Buffer($parser->transform($content));
+        $output = $parser->transform($content);
+        $output = $this->resolveHtmlUrls($output);
+        return new Buffer($output);
     }
 }
