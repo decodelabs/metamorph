@@ -18,6 +18,35 @@ use Stringable;
 class Metamorph
 {
     /**
+     * @var callable(string):string|null
+     */
+    protected static $urlResolver;
+
+    /**
+     * Set URL resolver
+     *
+     * @param callable(string):string|null $resolver
+     */
+    public static function setUrlResolver(?callable $resolver): void
+    {
+        static::$urlResolver = $resolver;
+    }
+
+    /**
+     * Resolve URL
+     */
+    public static function resolveUrl(string $url): string
+    {
+        if ($resolver = static::$urlResolver) {
+            $url = $resolver($url);
+        }
+
+        return $url;
+    }
+
+
+
+    /**
      * Initiate conversion
      *
      * @param array{0: mixed, 1?: array<string, mixed>, 2?: callable(Handler):void|null} $args
