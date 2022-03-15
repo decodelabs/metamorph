@@ -1,3 +1,6 @@
+## v0.3.4 (2022-03-15)
+* Allow mixed content as input
+
 ## v0.3.3 (2022-03-13)
 * Updated Tagged dependency
 
