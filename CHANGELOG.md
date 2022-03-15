@@ -1,3 +1,6 @@
+## v0.3.6 (2022-03-15)
+* Added simple URL resolver support
+
 ## v0.3.5 (2022-03-15)
 * Updated HtmlToText macros
 
