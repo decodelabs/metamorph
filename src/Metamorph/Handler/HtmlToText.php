@@ -27,9 +27,6 @@ class HtmlToText implements MacroHandler
             'wrap' => true
         ],
         'preview' => [
-            'maxLength' => 50
-        ],
-        'preview.wrap' => [
             'maxLength' => 50,
             'wrap' => true
         ]

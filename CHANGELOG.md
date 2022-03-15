@@ -1,3 +1,6 @@
+## v0.3.5 (2022-03-15)
+* Updated HtmlToText macros
+
 ## v0.3.4 (2022-03-15)
 * Allow mixed content as input
 
