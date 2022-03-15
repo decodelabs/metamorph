@@ -1,3 +1,5 @@
+* Added try/catch around URL resolver
+
 ## v0.3.6 (2022-03-15)
 * Added simple URL resolver support
 
