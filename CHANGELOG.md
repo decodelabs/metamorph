@@ -1,4 +1,7 @@
+* Removed PHP7 compatibility
 * Added try/catch around URL resolver
+* Updated ECS to v11
+* Updated PHPUnit to v9
 
 ## v0.3.6 (2022-03-15)
 * Added simple URL resolver support
