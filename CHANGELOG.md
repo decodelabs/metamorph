@@ -1,3 +1,4 @@
+## v0.4.0 (2022-08-23)
 * Removed PHP7 compatibility
 * Added try/catch around URL resolver
 * Updated ECS to v11
