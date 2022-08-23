@@ -14,6 +14,7 @@ use DecodeLabs\Metamorph\MacroHandler;
 use DecodeLabs\Tagged\ContentCollection;
 use ReflectionClass;
 use Stringable;
+use Throwable;
 
 class Metamorph
 {
@@ -37,8 +38,13 @@ class Metamorph
      */
     public static function resolveUrl(string $url): string
     {
-        if ($resolver = static::$urlResolver) {
+        if (!$resolver = static::$urlResolver) {
+            return $url;
+        }
+
+        try {
             $url = $resolver($url);
+        } catch (Throwable $e) {
         }
 
         return $url;
@@ -115,7 +121,7 @@ class Metamorph
         $name = $parts[0];
         $macro = $parts[1] ?? null;
 
-        /** @var class-string<Handler> */
+        /** @phpstan-var class-string<Handler> */
         $class = Archetype::resolve(Handler::class, ucfirst($name));
         $reflection = new ReflectionClass($class);
 
@@ -123,7 +129,7 @@ class Metamorph
             $reflection->implementsInterface(MacroHandler::class) &&
             $macro !== null
         ) {
-            /** @var class-string<MacroHandler> $class */
+            /** @phpstan-var class-string<MacroHandler> $class */
             $options = array_merge($class::loadMacro($macro) ?? [], $options ?? []);
         }
 
