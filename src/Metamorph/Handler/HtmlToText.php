@@ -33,20 +33,9 @@ class HtmlToText implements MacroHandler
     ];
 
 
-    /**
-     * @var int|null
-     */
-    protected $maxLength = null;
-
-    /**
-     * @var string
-     */
-    protected $ellipsis = '…';
-
-    /**
-     * @var bool
-     */
-    protected $wrap = false;
+    protected ?int $maxLength = null;
+    protected string $ellipsis = '…';
+    protected bool $wrap = false;
 
     /**
      * Set options
@@ -66,7 +55,7 @@ class HtmlToText implements MacroHandler
     public function convert(
         string $content,
         ?callable $setup = null
-    ) {
+    ): string|Stringable|null {
         $content = trim($content);
 
         if (!strlen($content)) {
@@ -127,11 +116,11 @@ class HtmlToText implements MacroHandler
 
     /**
      * Wrap output content
-     *
-     * @return string|Stringable|null
      */
-    protected function wrap(string $content, bool $shorten)
-    {
+    protected function wrap(
+        string $content,
+        bool $shorten
+    ): string|Stringable|null {
         if ($this->wrap) {
             return $this->wrapHtml($content, $shorten);
         } else {
@@ -143,8 +132,10 @@ class HtmlToText implements MacroHandler
     /**
      * Wrap text content
      */
-    protected function wrapText(string $content, bool $shorten): string
-    {
+    protected function wrapText(
+        string $content,
+        bool $shorten
+    ): string {
         if ($shorten) {
             $content = $this->shorten($content) . $this->ellipsis;
         }
@@ -154,11 +145,11 @@ class HtmlToText implements MacroHandler
 
     /**
      * Wrap HTML content
-     *
-     * @return string|Stringable|null
      */
-    protected function wrapHtml(string $content, bool $shorten)
-    {
+    protected function wrapHtml(
+        string $content,
+        bool $shorten
+    ): string|Stringable|null {
         if ($shorten) {
             $content = [
                 Element::create('abbr', [

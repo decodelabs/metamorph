@@ -56,27 +56,26 @@ class Metamorph
      * Initiate conversion
      *
      * @param array{0: mixed, 1?: array<string, mixed>, 2?: callable(Handler):void|null} $args
-     * @return string|Stringable|null
      */
-    public static function __callStatic(string $method, array $args)
-    {
+    public static function __callStatic(
+        string $method,
+        array $args
+    ): string|Stringable|null {
         return static::convert($method, ...$args);
     }
 
     /**
      * Handle conversion
      *
-     * @param mixed $content
      * @param callable(object):void|null $setup
      * @param array<string, mixed>|null $options
-     * @return string|Stringable|null
      */
     public static function convert(
         string $name,
-        $content,
+        mixed $content,
         ?array $options = [],
         ?callable $setup = null
-    ) {
+    ): string|Stringable|null {
         if ($content === null) {
             return null;
         }
@@ -96,7 +95,7 @@ class Metamorph
      *
      * @param mixed $content
      */
-    protected static function prepareContent($content): ?string
+    protected static function prepareContent(mixed $content): ?string
     {
         if (
             is_string($content) ||

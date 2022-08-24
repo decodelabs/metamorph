@@ -15,7 +15,9 @@ interface Handler
 {
     /**
      * @param callable(object):void|null $setup
-     * @return string|Stringable|null
      */
-    public function convert(string $content, ?callable $setup = null);
+    public function convert(
+        string $content,
+        ?callable $setup = null
+    ): string|Stringable|null;
 }
