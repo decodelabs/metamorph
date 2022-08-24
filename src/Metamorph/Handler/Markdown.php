@@ -38,15 +38,8 @@ class Markdown implements MacroHandler
         ],
     ];
 
-    /**
-     * @var bool
-     */
-    protected $inline = false;
-
-    /**
-     * @var bool
-     */
-    protected $safe = false;
+    protected bool $inline = false;
+    protected bool $safe = false;
 
     /**
      * Set options
@@ -68,7 +61,7 @@ class Markdown implements MacroHandler
     public function convert(
         string $content,
         ?callable $setup = null
-    ) {
+    ): string|Stringable|null {
         if (class_exists(Parsedown::class)) {
             return $this->convertParsedown($content, $setup);
         }
@@ -87,13 +80,11 @@ class Markdown implements MacroHandler
 
     /**
      * Convert markdown using Parsedown
-     *
-     * @return string|Stringable
      */
     protected function convertParsedown(
         string $content,
         ?callable $setup = null
-    ) {
+    ): string|Stringable {
         $parser = new Parsedown();
         $parser->setSafeMode(!$this->safe);
 
@@ -113,13 +104,11 @@ class Markdown implements MacroHandler
 
     /**
      * Convert markdown using Markdown lib
-     *
-     * @return string|Stringable
      */
     protected function convertMarkdownLib(
         string $content,
         ?callable $setup = null
-    ) {
+    ): string|Stringable {
         $parser = new MarkdownLib();
 
         if (!$this->safe) {

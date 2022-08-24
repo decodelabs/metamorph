@@ -13,10 +13,7 @@ use DecodeLabs\Metamorph;
 
 trait HtmlTrait
 {
-    /**
-     * @var bool
-     */
-    protected $resolveUrls = true;
+    protected bool $resolveUrls = true;
 
     /**
      * Resolve URLs in HTML
