@@ -7,7 +7,13 @@
 [![PHPStan](https://img.shields.io/badge/PHPStan-enabled-44CC11.svg?longCache=true&style=flat)](https://github.com/phpstan/phpstan)
 [![License](https://img.shields.io/packagist/l/decodelabs/metamorph?style=flat)](https://packagist.org/packages/decodelabs/metamorph)
 
-A flexible framework for content transformations
+### A flexible framework for content transformations
+
+Metamorph provides an extensible framework for transforming content from one format to another through a simple and intuitive interface.
+
+_Get news and updates on the [DecodeLabs blog](https://blog.decodelabs.com)._
+
+---
 
 
 ## Installation
