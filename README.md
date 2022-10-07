@@ -34,7 +34,7 @@ You can access all the primary functionality via this static frontage without co
 
 Use the Metamorph frontage to manipulate and output different formats of content.
 
-Named macros allow for options to be passed as part of the call.
+Options can be passed as the second parameter and named macros allow for bundles of options to be passed as part of the call.
 
 Metamorph uses [Archetype](https://github.com/decodelabs/archetype) to load `Handler` classes - the base package comes with a small set of handlers out of the box:
 
