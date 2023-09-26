@@ -36,7 +36,7 @@ class Text implements MacroHandler
 
 
     protected ?int $maxLength = null;
-    protected string $ellipsis = '…';
+    protected string $ellipsis = '…'; // @ignore-non-ascii
     protected bool $wrap = true;
 
     /**

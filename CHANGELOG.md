@@ -1,3 +1,10 @@
+## v0.5.1 (2023-09-26)
+* Converted phpstan doc comments to generic
+* Migrated to use effigy in CI workflow
+* Fixed PHP8.1 testing
+* Updated composer check script
+* Updated CI environment
+
 ## v0.5.0 (2022-08-24)
 * Added concrete types to all members
 

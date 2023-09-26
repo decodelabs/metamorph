@@ -120,7 +120,7 @@ class Metamorph
         $name = $parts[0];
         $macro = $parts[1] ?? null;
 
-        /** @phpstan-var class-string<Handler> */
+        /** @var class-string<Handler> */
         $class = Archetype::resolve(Handler::class, ucfirst($name));
         $reflection = new ReflectionClass($class);
 
@@ -128,7 +128,7 @@ class Metamorph
             $reflection->implementsInterface(MacroHandler::class) &&
             $macro !== null
         ) {
-            /** @phpstan-var class-string<MacroHandler> $class */
+            /** @var class-string<MacroHandler> $class */
             $options = array_merge($class::loadMacro($macro) ?? [], $options ?? []);
         }
 
