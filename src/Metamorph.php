@@ -28,16 +28,18 @@ class Metamorph
      *
      * @param callable(string):string|null $resolver
      */
-    public static function setUrlResolver(?callable $resolver): void
-    {
+    public static function setUrlResolver(
+        ?callable $resolver
+    ): void {
         static::$urlResolver = $resolver;
     }
 
     /**
      * Resolve URL
      */
-    public static function resolveUrl(string $url): string
-    {
+    public static function resolveUrl(
+        string $url
+    ): string {
         if (!$resolver = static::$urlResolver) {
             return $url;
         }
@@ -95,8 +97,9 @@ class Metamorph
      *
      * @param mixed $content
      */
-    protected static function prepareContent(mixed $content): ?string
-    {
+    protected static function prepareContent(
+        mixed $content
+    ): ?string {
         if (
             is_string($content) ||
             $content instanceof Stringable

@@ -16,5 +16,7 @@ interface MacroHandler extends Handler
      *
      * @return array<string, mixed>|null
      */
-    public static function loadMacro(string $name): ?array;
+    public static function loadMacro(
+        string $name
+    ): ?array;
 }
