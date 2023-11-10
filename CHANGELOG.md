@@ -1,3 +1,5 @@
+* Made PHP8.1 minimum version
+
 ## v0.5.1 (2023-09-26)
 * Converted phpstan doc comments to generic
 * Migrated to use effigy in CI workflow
