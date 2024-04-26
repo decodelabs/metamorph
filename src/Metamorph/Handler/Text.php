@@ -44,8 +44,9 @@ class Text implements MacroHandler
      *
      * @param array<string, mixed> $options
      */
-    public function __construct(array $options)
-    {
+    public function __construct(
+        array $options
+    ) {
         $this->maxLength = Coercion::toIntOrNull($options['maxLength'] ?? $this->maxLength);
         $this->wrap = Coercion::toBool($options['wrap'] ?? $this->wrap);
         $this->ellipsis = Coercion::toString($options['ellipsis'] ?? $this->ellipsis);
@@ -79,8 +80,9 @@ class Text implements MacroHandler
     /**
      * Strip significant characters from content
      */
-    protected function escape(string $content): string
-    {
+    protected function escape(
+        string $content
+    ): string {
         return htmlspecialchars($content, ENT_QUOTES, 'UTF-8');
     }
 
@@ -88,8 +90,9 @@ class Text implements MacroHandler
     /**
      * Shorten output string
      */
-    protected function shorten(string $content): string
-    {
+    protected function shorten(
+        string $content
+    ): string {
         return mb_substr($content, 0, $this->maxLength);
     }
 

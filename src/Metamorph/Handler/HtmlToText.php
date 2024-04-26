@@ -42,8 +42,9 @@ class HtmlToText implements MacroHandler
      *
      * @param array<string, mixed> $options
      */
-    public function __construct(array $options)
-    {
+    public function __construct(
+        array $options
+    ) {
         $this->maxLength = Coercion::toIntOrNull($options['maxLength'] ?? $this->maxLength);
         $this->wrap = Coercion::toBool($options['wrap'] ?? $this->wrap);
         $this->ellipsis = Coercion::toString($options['ellipsis'] ?? $this->ellipsis);
@@ -85,8 +86,9 @@ class HtmlToText implements MacroHandler
     /**
      * Strip significant characters from content
      */
-    protected function strip(string $content): ?string
-    {
+    protected function strip(
+        string $content
+    ): ?string {
         $content = new Buffer($content);
         $content = (string)ContentCollection::normalize($content);
 
@@ -108,8 +110,9 @@ class HtmlToText implements MacroHandler
     /**
      * Shorten output string
      */
-    protected function shorten(string $content): string
-    {
+    protected function shorten(
+        string $content
+    ): string {
         return mb_substr($content, 0, $this->maxLength);
     }
 

@@ -18,8 +18,9 @@ trait MacroHandlerTrait
      *
      * @return array<string, mixed>|null
      */
-    public static function loadMacro(string $name): ?array
-    {
+    public static function loadMacro(
+        string $name
+    ): ?array {
         if (
             !isset(static::MACROS[$name]) ||
             !is_array(static::MACROS[$name])

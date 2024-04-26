@@ -18,8 +18,9 @@ trait HtmlTrait
     /**
      * Resolve URLs in HTML
      */
-    protected function resolveHtmlUrls(string $html): string
-    {
+    protected function resolveHtmlUrls(
+        string $html
+    ): string {
         if (!$this->resolveUrls) {
             return $html;
         }
