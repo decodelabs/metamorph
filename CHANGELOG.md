@@ -1,3 +1,4 @@
+## v0.5.5 (2024-05-07)
 * Updated Tagged dependency
 
 ## v0.5.4 (2024-04-26)
