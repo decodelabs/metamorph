@@ -1,3 +1,5 @@
+* Updated dependency versions
+
 ## v0.5.5 (2024-05-07)
 * Updated Tagged dependency
 
