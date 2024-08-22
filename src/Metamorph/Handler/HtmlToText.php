@@ -22,7 +22,7 @@ class HtmlToText implements MacroHandler
 {
     use MacroHandlerTrait;
 
-    public const MACROS = [
+    protected const Macros = [
         'wrap' => [
             'wrap' => true
         ],

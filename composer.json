@@ -12,7 +12,7 @@
         "php": "^8.1",
         "symfony/polyfill-mbstring": "^1.7",
 
-        "decodelabs/archetype": "^0.2|^0.3",
+        "decodelabs/archetype": "^0.3",
         "decodelabs/coercion": "^0.2",
         "decodelabs/exceptional": "^0.4",
         "decodelabs/tagged": "^0.15"
@@ -36,7 +36,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-develop": "0.5.x-dev"
+            "dev-develop": "0.6.x-dev"
         }
     }
 }

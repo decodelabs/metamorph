@@ -21,7 +21,7 @@ class Text implements MacroHandler
 {
     use MacroHandlerTrait;
 
-    public const MACROS = [
+    protected const Macros = [
         'raw' => [
             'wrap' => false
         ],
