@@ -9,6 +9,9 @@ declare(strict_types=1);
 
 namespace DecodeLabs\Metamorph;
 
+/**
+ * @phpstan-require-implements MacroHandler
+ */
 trait MacroHandlerTrait
 {
     //protected const Macros = [];
