@@ -25,7 +25,7 @@ class Markdown implements MacroHandler
     use MacroHandlerTrait;
     use HtmlTrait;
 
-    public const MACROS = [
+    protected const Macros = [
         'safe' => [
             'safe' => true
         ],

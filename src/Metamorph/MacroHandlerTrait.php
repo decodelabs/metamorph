@@ -11,7 +11,7 @@ namespace DecodeLabs\Metamorph;
 
 trait MacroHandlerTrait
 {
-    //const MACROS = [];
+    //protected const Macros = [];
 
     /**
      * Load macro options
@@ -22,12 +22,12 @@ trait MacroHandlerTrait
         string $name
     ): ?array {
         if (
-            !isset(static::MACROS[$name]) ||
-            !is_array(static::MACROS[$name])
+            !isset(static::Macros[$name]) ||
+            !is_array(static::Macros[$name])
         ) {
             return null;
         }
 
-        return static::MACROS[$name];
+        return static::Macros[$name];
     }
 }
