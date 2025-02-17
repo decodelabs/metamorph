@@ -9,16 +9,16 @@
             "email": "tom@inflatablecookie.com"
         } ],
     "require": {
-        "php": "^8.1",
-        "symfony/polyfill-mbstring": "^1.7",
+        "php": "^8.4",
+        "symfony/polyfill-mbstring": "^1.31",
 
-        "decodelabs/archetype": "^0.3",
-        "decodelabs/coercion": "^0.2",
-        "decodelabs/exceptional": "^0.4",
-        "decodelabs/tagged": "^0.15"
+        "decodelabs/archetype": "^0.3.8",
+        "decodelabs/coercion": "^0.2.15",
+        "decodelabs/exceptional": "^0.5.3",
+        "decodelabs/tagged": "^0.16"
     },
     "require-dev": {
-        "decodelabs/phpstan-decodelabs": "^0.6",
+        "decodelabs/phpstan-decodelabs": "^0.7",
 
         "soundasleep/html2text": "^1.1|^2",
         "erusev/parsedown": "^1.7",
@@ -34,9 +34,31 @@
             "DecodeLabs\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "DecodeLabs\\Metamorph\\Tests\\": "tests/"
+        }
+    },
     "extra": {
         "branch-alias": {
-            "dev-develop": "0.6.x-dev"
+            "dev-develop": "0.7.x-dev"
+        },
+        "effigy": {
+            "exports": [
+                "phpstan-extension.neon"
+            ]
+        },
+        "phpstan": {
+            "includes": [
+                "phpstan-extension.neon"
+            ]
         }
+    },
+    "config": {
+        "allow-plugins": {
+            "phpstan/extension-installer": true
+        }
+    },
+    "repositories": {
     }
 }

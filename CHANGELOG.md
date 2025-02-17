@@ -1,3 +1,13 @@
+## v0.7.0 (2024-02-17)
+* Added @phpstan-require-implements constraints
+* Upgraded PHPStan to v2
+* Updated dependencies
+* Made Macros const part of MacroHandler interface
+* Tidied boolean logic
+* Fixed Exceptional syntax
+* Added PHP8.4 to CI workflow
+* Made PHP8.4 minimum version
+
 ## v0.6.0 (2024-08-21)
 * Converted consts to protected PascalCase
 * Updated dependency versions

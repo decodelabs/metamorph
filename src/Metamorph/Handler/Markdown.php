@@ -14,10 +14,8 @@ use DecodeLabs\Exceptional;
 use DecodeLabs\Metamorph\MacroHandler;
 use DecodeLabs\Metamorph\MacroHandlerTrait;
 use DecodeLabs\Tagged\Buffer;
-
 use Michelf\Markdown as MarkdownLib;
 use Parsedown;
-
 use Stringable;
 
 class Markdown implements MacroHandler
@@ -25,7 +23,7 @@ class Markdown implements MacroHandler
     use MacroHandlerTrait;
     use HtmlTrait;
 
-    protected const Macros = [
+    public const array Macros = [
         'safe' => [
             'safe' => true
         ],
@@ -44,7 +42,7 @@ class Markdown implements MacroHandler
     /**
      * Set options
      *
-     * @param array<string, mixed> $options
+     * @param array<string,mixed> $options
      */
     public function __construct(
         array $options
@@ -75,7 +73,7 @@ class Markdown implements MacroHandler
         }
 
         throw Exceptional::ComponentUnavailable(
-            'No supported Markdown processors could be found for the requested format - try installing Parsedown'
+            message: 'No supported Markdown processors could be found for the requested format - try installing Parsedown'
         );
     }
 
@@ -94,9 +92,9 @@ class Markdown implements MacroHandler
         }
 
         if ($this->inline) {
-            $output = $parser->line($content);
+            $output = Coercion::toString($parser->line($content));
         } else {
-            $output = $parser->text($content);
+            $output = Coercion::toString($parser->text($content));
         }
 
         $output = $this->resolveHtmlUrls($output);
