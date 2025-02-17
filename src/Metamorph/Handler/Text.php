@@ -21,7 +21,7 @@ class Text implements MacroHandler
 {
     use MacroHandlerTrait;
 
-    protected const Macros = [
+    public const array Macros = [
         'raw' => [
             'wrap' => false
         ],
@@ -42,7 +42,7 @@ class Text implements MacroHandler
     /**
      * Set options
      *
-     * @param array<string, mixed> $options
+     * @param array<string,mixed> $options
      */
     public function __construct(
         array $options

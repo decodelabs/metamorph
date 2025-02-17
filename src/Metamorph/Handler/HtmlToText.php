@@ -22,7 +22,7 @@ class HtmlToText implements MacroHandler
 {
     use MacroHandlerTrait;
 
-    protected const Macros = [
+    public const array Macros = [
         'wrap' => [
             'wrap' => true
         ],
@@ -40,7 +40,7 @@ class HtmlToText implements MacroHandler
     /**
      * Set options
      *
-     * @param array<string, mixed> $options
+     * @param array<string,mixed> $options
      */
     public function __construct(
         array $options
