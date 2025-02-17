@@ -10,11 +10,11 @@
         } ],
     "require": {
         "php": "^8.4",
-        "symfony/polyfill-mbstring": "^1.7",
+        "symfony/polyfill-mbstring": "^1.31",
 
-        "decodelabs/archetype": "^0.3",
-        "decodelabs/coercion": "^0.2",
-        "decodelabs/exceptional": "^0.5",
+        "decodelabs/archetype": "^0.3.8",
+        "decodelabs/coercion": "^0.2.15",
+        "decodelabs/exceptional": "^0.5.3",
         "decodelabs/tagged": "^0.16"
     },
     "require-dev": {
@@ -41,7 +41,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-develop": "0.6.x-dev"
+            "dev-develop": "0.7.x-dev"
         },
         "effigy": {
             "exports": [
