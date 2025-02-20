@@ -92,9 +92,9 @@ class Markdown implements MacroHandler
         }
 
         if ($this->inline) {
-            $output = Coercion::toString($parser->line($content));
+            $output = Coercion::asString($parser->line($content));
         } else {
-            $output = Coercion::toString($parser->text($content));
+            $output = Coercion::asString($parser->text($content));
         }
 
         $output = $this->resolveHtmlUrls($output);

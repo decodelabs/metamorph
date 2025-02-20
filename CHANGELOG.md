@@ -1,3 +1,6 @@
+## v0.7.1 (2024-02-20)
+* Upgraded Coercion dependency
+
 ## v0.7.0 (2024-02-17)
 * Added @phpstan-require-implements constraints
 * Upgraded PHPStan to v2
