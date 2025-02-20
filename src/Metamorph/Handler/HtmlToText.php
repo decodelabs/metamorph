@@ -45,9 +45,9 @@ class HtmlToText implements MacroHandler
     public function __construct(
         array $options
     ) {
-        $this->maxLength = Coercion::toIntOrNull($options['maxLength'] ?? $this->maxLength);
+        $this->maxLength = Coercion::tryInt($options['maxLength'] ?? $this->maxLength);
         $this->wrap = Coercion::toBool($options['wrap'] ?? $this->wrap);
-        $this->ellipsis = Coercion::toString($options['ellipsis'] ?? $this->ellipsis);
+        $this->ellipsis = Coercion::asString($options['ellipsis'] ?? $this->ellipsis);
     }
 
     /**
