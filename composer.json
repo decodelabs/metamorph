@@ -15,7 +15,7 @@
         "decodelabs/archetype": "^0.3.8",
         "decodelabs/coercion": "^0.3",
         "decodelabs/exceptional": "^0.5.3",
-        "decodelabs/tagged": "^0.16"
+        "decodelabs/tagged": "^0.17"
     },
     "require-dev": {
         "decodelabs/phpstan-decodelabs": "^0.7",

@@ -1,3 +1,6 @@
+## v0.7.2 (2024-03-25)
+* Upgraded Tagged dependency
+
 ## v0.7.1 (2024-02-20)
 * Upgraded Coercion dependency
 
