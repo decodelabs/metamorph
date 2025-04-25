@@ -11,8 +11,6 @@
 
 Metamorph provides an extensible framework for transforming content from one format to another through a simple and intuitive interface.
 
-_Get news and updates on the [DecodeLabs blog](https://blog.decodelabs.com)._
-
 ---
 
 
