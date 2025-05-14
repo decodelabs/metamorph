@@ -61,9 +61,16 @@ class Markdown implements MacroHandler
         string $content,
         ?callable $setup = null
     ): string|Stringable|null {
+        $errorReporting = error_reporting();
+        error_reporting($errorReporting & ~E_DEPRECATED);
+
         if (class_exists(Parsedown::class)) {
-            return $this->convertParsedown($content, $setup);
+            $output = $this->convertParsedown($content, $setup);
+            error_reporting($errorReporting);
+            return $output;
         }
+
+        error_reporting($errorReporting);
 
         if (
             !$this->inline &&
