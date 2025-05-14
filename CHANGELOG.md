@@ -1,3 +1,6 @@
+## v0.7.6 (2024-05-14)
+* Disable deprecated error reporting when using Parsedown
+
 ## v0.7.5 (2024-04-25)
 * Upgraded Tagged dependency
 
