@@ -10,7 +10,6 @@ declare(strict_types=1);
 namespace DecodeLabs\PHPStan;
 
 use DecodeLabs\Metamorph;
-use DecodeLabs\PHPStan\MethodReflection;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Reflection\FunctionVariant;
 use PHPStan\Reflection\MethodReflection as MethodReflectionInterface;
