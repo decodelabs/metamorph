@@ -40,8 +40,6 @@ class Text implements MacroHandler
     protected bool $wrap = true;
 
     /**
-     * Set options
-     *
      * @param array<string,mixed> $options
      */
     public function __construct(
@@ -52,9 +50,6 @@ class Text implements MacroHandler
         $this->ellipsis = Coercion::asString($options['ellipsis'] ?? $this->ellipsis);
     }
 
-    /**
-     * Convert input to plain text
-     */
     public function convert(
         string $content,
         ?callable $setup = null
@@ -77,9 +72,6 @@ class Text implements MacroHandler
     }
 
 
-    /**
-     * Strip significant characters from content
-     */
     protected function escape(
         string $content
     ): string {
@@ -87,9 +79,6 @@ class Text implements MacroHandler
     }
 
 
-    /**
-     * Shorten output string
-     */
     protected function shorten(
         string $content
     ): string {
@@ -97,9 +86,6 @@ class Text implements MacroHandler
     }
 
 
-    /**
-     * Wrap output content
-     */
     protected function wrap(
         string $content,
         bool $shorten
@@ -112,9 +98,6 @@ class Text implements MacroHandler
     }
 
 
-    /**
-     * Wrap text content
-     */
     protected function wrapText(
         string $content,
         bool $shorten
@@ -126,9 +109,6 @@ class Text implements MacroHandler
         return $content;
     }
 
-    /**
-     * Wrap HTML content
-     */
     protected function wrapHtml(
         string $content,
         bool $shorten

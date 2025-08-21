@@ -15,9 +15,6 @@ trait HtmlTrait
 {
     protected bool $resolveUrls = true;
 
-    /**
-     * Resolve URLs in HTML
-     */
     protected function resolveHtmlUrls(
         string $html
     ): string {

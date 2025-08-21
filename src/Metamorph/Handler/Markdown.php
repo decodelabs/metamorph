@@ -40,8 +40,6 @@ class Markdown implements MacroHandler
     protected bool $safe = false;
 
     /**
-     * Set options
-     *
      * @param array<string,mixed> $options
      */
     public function __construct(
@@ -53,10 +51,6 @@ class Markdown implements MacroHandler
     }
 
 
-
-    /**
-     * Convert markdown to HTML
-     */
     public function convert(
         string $content,
         ?callable $setup = null
@@ -84,9 +78,6 @@ class Markdown implements MacroHandler
         );
     }
 
-    /**
-     * Convert markdown using Parsedown
-     */
     protected function convertParsedown(
         string $content,
         ?callable $setup = null
@@ -108,9 +99,6 @@ class Markdown implements MacroHandler
         return new Buffer($output);
     }
 
-    /**
-     * Convert markdown using Markdown lib
-     */
     protected function convertMarkdownLib(
         string $content,
         ?callable $setup = null

@@ -22,12 +22,6 @@ composer require decodelabs/metamorph
 
 ## Usage
 
-### Importing
-
-Metamorph uses [Veneer](https://github.com/decodelabs/veneer) to provide a unified frontage under <code>DecodeLabs\Metamorph</code>.
-You can access all the primary functionality via this static frontage without compromising testing and dependency injection.
-
-
 ### Transformations
 
 Use the Metamorph frontage to manipulate and output different formats of content.

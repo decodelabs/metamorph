@@ -17,8 +17,6 @@ interface MacroHandler extends Handler
     public const array Macros = [];
 
     /**
-     * Load macro options
-     *
      * @return array<string,mixed>|null
      */
     public static function loadMacro(

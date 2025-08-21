@@ -15,8 +15,6 @@ namespace DecodeLabs\Metamorph;
 trait MacroHandlerTrait
 {
     /**
-     * Load macro options
-     *
      * @return ?array<string,mixed>
      */
     public static function loadMacro(
