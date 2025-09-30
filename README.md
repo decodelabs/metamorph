@@ -16,6 +16,10 @@ Metamorph provides an extensible framework for transforming content from one for
 
 ## Installation
 
+This package requires PHP 8.4 or higher.
+
+Install via Composer:
+
 ```bash
 composer require decodelabs/metamorph
 ```
