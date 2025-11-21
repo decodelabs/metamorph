@@ -2,12 +2,18 @@
     "name": "decodelabs/metamorph",
     "description": "A flexible framework for content transformations",
     "type": "library",
-    "keywords": [ "render", "transform", "content" ],
+    "keywords": [
+        "render",
+        "transform",
+        "content"
+    ],
     "license": "MIT",
-    "authors": [ {
+    "authors": [
+        {
             "name": "Tom Wright",
             "email": "tom@inflatablecookie.com"
-        } ],
+        }
+    ],
     "require": {
         "php": "^8.4",
         "symfony/polyfill-mbstring": "^1.33",
@@ -19,6 +25,7 @@
         "decodelabs/tagged": "^0.21"
     },
     "require-dev": {
+        "decodelabs/chorus": "^0.1",
         "decodelabs/phpstan-decodelabs": "^0.7",
 
         "soundasleep/html2text": "^2.1",
@@ -59,7 +66,5 @@
         "allow-plugins": {
             "phpstan/extension-installer": true
         }
-    },
-    "repositories": {
     }
 }
